@@ -56,25 +56,25 @@ h1 {
 	transform: scale(1.05); 
 }
 
-.characterImage1 { background: url(../images/blackWidow.jpg);}
+.characterImage1 { background: url(images/blackWidow.jpg);}
 
-.characterImage2 { background: url(../images/captainAmerica.jpg); }
+.characterImage2 { background: url(images/captainAmerica.jpg); }
 
-.characterImage3 { background: url(../images/doctorStrange.jpg); }
+.characterImage3 { background: url(images/doctorStrange.jpg); }
 
-.characterImage4 { background: url(../images/spiderMan.jpg); }
+.characterImage4 { background: url(images/spiderMan.jpg); }
 
-.characterImage5 { background: url(../images/jessicaJones.jpg); }
+.characterImage5 { background: url(images/jessicaJones.jpg); }
 
-.characterImage6 { background: url(../images/lukeCage.jpg); }
+.characterImage6 { background: url(images/lukeCage.jpg); }
 
-.characterImage7 { background: url(../images/emmaFrost.jpg); }
+.characterImage7 { background: url(images/emmaFrost.jpg); }
 
-.characterImage8 { background: url(../images/blackPanther.jpg); }
+.characterImage8 { background: url(images/blackPanther.jpg); }
 
-.characterImage9 { background: url(../images/daredevil.jpg); }
+.characterImage9 { background: url(images/daredevil.jpg); }
 
-.characterImage10 { background: url(../images/wolverine.jpg); }
+.characterImage10 { background: url(images/wolverine.jpg); }
 
 
 .characterName {
