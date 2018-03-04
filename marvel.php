@@ -1,6 +1,7 @@
 <?php
     
     $site="http://gateway.marvel.com/v1/public/characters/1009189/comics";
+    $site2="http://gateway.marvel.com/v1/public/characters";
     $public_key="6d9ab1cb36c79afd6168a751b4195251";
     $private_key="7c3998174e56ace40681561b366adf297c73931c";
 
@@ -9,6 +10,9 @@
     $hash="c8abca43b7fdefb0a37974a45fd17d6a";
 
     $res = file_get_contents($site."?orderBy=-focDate&ts=12&apikey=".$public_key."&hash=".$hash);
+
+
+    $res2 = file_get_contents($site2."?nameStartsWith=black&ts=12&apikey=".$public_key."&hash=".$hash);
     
     
 ?>
@@ -42,21 +46,27 @@
                 text-align: right;
             }
             
-            .query span{
+            .query p{
+                display: inline-block;
+                margin-left: auto;
+                
                 background-color: skyblue;
                 padding: 10px;
                 border-radius: 10px 10px 0px 10px;
             }
             
             
-            .answer span{
+            .answer p{
+                display: inline-block;
+                
                 background-color: #eee;
                 padding: 10px;
                 border-radius: 10px 10px 10px 0px;
             }
             
             .query, .answer{
-                padding: 10px;
+                padding-left: 10px;
+                padding-right: 10px;
             }
             
             
@@ -65,6 +75,20 @@
                 
                 width: 300px;
             }
+            
+            table td{
+                color: white;
+            }
+            
+            table td:hover{
+                background-color: darkred;
+            }
+            
+            #ress{
+                width: 100%;
+                overflow-x:hidden;
+            }
+            
                         
             
         </style>
@@ -72,6 +96,31 @@
         
         
         <script>
+            
+            function gotochat(){
+                document.getElementById("charselect").style.display="none";
+                document.getElementById("mainwindow").style.display="block";
+            }
+            
+            function showallchars(){
+                
+                var allchars = <?php echo $res2; ?>;
+                allchars= allchars.data.results;
+                
+                var tab2='<h3>Select a character</h3><table class="table" border=1><tr>';
+                
+                for(var i=0;i<allchars.length;++i){
+                    
+                    if(allchars[i].thumbnail.path!='http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available'){
+                        
+                        tab2+='<td onclick="gotochat()"><img width=200 src="'+allchars[i].thumbnail.path+'.'+allchars[i].thumbnail.extension+'">';
+                        tab2+='<br>'+allchars[i].name;    
+                    }
+                }
+            
+                document.getElementById("charselect").innerHTML=tab2;    
+                document.getElementById("charselect").style.overflowX="scroll";   
+            }
             
             function getres(){
                 var t= <?php echo $res; ?> ;
@@ -91,6 +140,7 @@
                 console.log(t);
                                 
                 document.getElementById("ress").innerHTML=tab;    
+                document.getElementById("ress").style.overflowX="scroll";
             }
             
             function loader(){
@@ -102,6 +152,8 @@
                         document.getElementById('chat').value="";
                     }
                 }
+                
+                showallchars();
             }
             
             function reply(query=document.getElementById("chat").value){
@@ -117,7 +169,7 @@
                 
                 var chat=document.getElementById("chatwindow");
                 
-                chat.innerHTML += '<div class="query"><span>'+query+'</span></div>';
+                chat.innerHTML += '<div class="query"><p>'+query+'</p></div>';
                 
                 
                 var api = microsoft + encodeURIComponent(query);
@@ -134,7 +186,7 @@
                 
                 var answer=JSON.parse(oReq.responseText).topScoringIntent.intent;
                 
-                chat.innerHTML += '<div class="answer"><span>'+answerfrommicrosoft+'</span></div>';
+                chat.innerHTML += '<div class="answer"><p>'+answerfrommicrosoft+'</p></div>';
                 //chat.innerHTML += '<div class="answer"><span>'+answer+'</span></div>';
             
             }
@@ -158,7 +210,7 @@
                     return "Yes! I'm friends with the Hulk";    
                 }
                 else{
-                    return ""
+                    return "";
                 }
                 
                 
@@ -167,7 +219,7 @@
             function GetComics(ans){
                 getres();   
                 
-                return "Below are some of the comics I appear in this month!";
+                return "Below are some of the Marvel comics I appear in!";
             }
             
             function Greeting(ans){
@@ -182,6 +234,10 @@
                 document.getElementById("chatwindow").innerHTML="";
             }
             
+            function RealName(ans){
+                return "My real name is Natasha Romanoff";
+            }
+            
             
             
         </script>
@@ -189,9 +245,19 @@
     <body onload="loader()">
         
         
-        <div id="mainwindow">
-            
+        <div style="margin:0 auto; text-align:center">
+        
             <img width=300px src="https://upload.wikimedia.org/wikipedia/commons/0/04/MarvelLogo.svg">
+
+            <div id="charselect">
+                </div>
+        </div>
+        
+        <div id="mainwindow" style="display:none">
+            
+            
+        
+            
             
             <h3>Chat With Black Widow!</h3>
 
