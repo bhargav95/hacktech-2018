@@ -26,16 +26,17 @@
         <style>
             
             body{
-                background-color: red;
+                background-color: #ef3131;
             }
             
             h3{
                 color: white;
+                font-family: sans-serif;
             }
             
             #chatwindow{
                 height: 500px;
-                width: 300px;
+                width: 1200px;
                 vertical-align: bottom;
                 overflow-y: scroll;
                 display: table-cell;
@@ -43,7 +44,7 @@
             }
             
             .query{
-                width: 300px;
+                width: 1200px;
                 text-align: right;
             }
             
@@ -74,15 +75,16 @@
             #mainwindow{
                 margin: 0 auto;
                 
-                width: 300px;
+                width: 1200px;
             }
             
             table td{
-                color: white;
+                color: black;
             }
             
             table td:hover{
                 background-color: darkred;
+                color: white;
             }
             
             #ress{
@@ -90,7 +92,45 @@
                 overflow-x:hidden;
             }
             
-                        
+            /* The Modal (background) */
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 100px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            }
+
+            /* Modal Content */
+            .modal-content {
+                background-color: #fefefe;
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+            }
+
+            /* The Close Button */
+            .close {
+                color: #aaaaaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+           
             
         </style>
         
@@ -142,6 +182,32 @@
                                 
                 document.getElementById("ress").innerHTML=tab;    
                 document.getElementById("ress").style.overflowX="scroll";
+            }
+            
+             function getres1(){
+                 
+                
+                var t= <?php echo $res; ?> ;
+                //alert(ele.target);
+                t=t.data.results;
+                //ele.div.style.display='block';
+                tab='<table class="table" border=1><tr>';
+                
+                for(var i=0;i<t.length;++i){
+                    
+                    tab+='<td><img width=200 src="'+t[i].thumbnail.path+'.'+t[i].thumbnail.extension+'">';
+                    tab+='<br>'+t[i].title+'</td>';
+                    
+                }
+                
+                tab+='</table>';
+                
+                console.log(tab);
+                                
+                document.getElementById('hidden-div').innerHTML=tab;    
+                document.getElementById('hidden-div').style.display='block';
+                
+                document.getElementById('hidden-div').style.overflowX="scroll";
             }
             
             function loader(){
@@ -217,10 +283,17 @@
                 
             }
             
+            function createComics(ele)
+            {
+                document.getElementById('myModal').style.display='block';
+                //ele.style.display='block';
+                getres1()
+            }
             function GetComics(ans){
-                getres();   
                 
-                return "Below are some of the Marvel comics I appear in!";
+                
+                //getres();   
+                return '<button id="myBtn" onclick="createComics(this)"style="display:blockfmy;">Click here</button>&nbsp;to see some of the Marvel comics I appear in!';
             }
             
             function Greeting(ans){
@@ -228,7 +301,8 @@
             }
             
             function GetName(ans){
-                return "Hello "+ans.entities[0].entity;
+                name = ans.entities[0].entity
+                return "Hello "+ name[0].toUpperCase() + name.substr(1) +"!";
             }
             
             function clearchat(){
@@ -248,7 +322,8 @@
         
         <div style="margin:0 auto; text-align:center">
         
-            <img width=300px src="https://upload.wikimedia.org/wikipedia/commons/0/04/MarvelLogo.svg">
+            <img src="https://i.imgur.com/ZIYrlmG.png" width="1000">
+
 
             <div id="charselect">
                 </div>
@@ -257,9 +332,50 @@
         <div id="mainwindow" style="display:block">
             
             
-        
             
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+
+              <!-- Modal content -->
+              <div class="modal-content" >
+                <span class="close">&times;</span>
+                <p>Here are the comics that I appear in: </p>
+                    <div id='hidden-div' style='display:none;'>
+                    </div>
+               
+                
+              </div>
+
+            </div>
             
+            <script>
+            // Get the modal
+            var modal = document.getElementById('myModal');
+
+            // Get the button that opens the modal
+            var btn = document.getElementById("myBtn");
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks the button, open the modal 
+            //btn.addEventListener("click", getres1);
+                
+             
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+            </script>
+
+
             <h3>Chat With Black Widow!</h3>
 
             <div id="chatwindow">
