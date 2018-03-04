@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
+
 body {
     background-color: #ef3131;
 }
@@ -84,7 +86,7 @@ h1 {
 }
 
 .characterName h3 {
-    font-family: sans-serif;
+    font-family: 'Permanent Marker', cursive;
     text-transform: uppercase;
 	color: #fff;
 	font-size: 30px;

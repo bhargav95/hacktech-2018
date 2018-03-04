@@ -36,7 +36,7 @@
             
             #chatwindow{
                 height: 500px;
-                width: 1200px;
+                width: 950px;
                 vertical-align: bottom;
                 overflow-y: scroll;
                 display: table-cell;
@@ -44,7 +44,7 @@
             }
             
             .query{
-                width: 1200px;
+                width: 950px;
                 text-align: right;
             }
             
@@ -74,8 +74,7 @@
             
             #mainwindow{
                 margin: 0 auto;
-                
-                width: 1200px;
+                width: 950px;
             }
             
             table td{
@@ -168,7 +167,7 @@
                 
                 t=t.data.results;
                 
-                tab='<table class="table" border=1><tr>';
+                tab='<table class="table" border=0><tr>';
                 
                 for(var i=0;i<t.length;++i){
                     
@@ -191,7 +190,7 @@
                 //alert(ele.target);
                 t=t.data.results;
                 //ele.div.style.display='block';
-                tab='<table class="table" border=1><tr>';
+                tab='<table class="table" border=0><tr>';
                 
                 for(var i=0;i<t.length;++i){
                     
@@ -253,7 +252,7 @@
                 
                 var answer=JSON.parse(oReq.responseText).topScoringIntent.intent;
                 
-                chat.innerHTML += '<div class="answer"><p>'+answerfrommicrosoft+'</p></div>';
+                chat.innerHTML += '<div class="answer"><img src="images/blackWidow.jpg" style="border-radius: 50%" alt="Black Widow" height="48" width="48"><p>'+answerfrommicrosoft+'</p></div>';
                 //chat.innerHTML += '<div class="answer"><span>'+answer+'</span></div>';
             
             }
@@ -335,17 +334,14 @@
             
             <!-- The Modal -->
             <div id="myModal" class="modal">
-
+                
               <!-- Modal content -->
               <div class="modal-content" >
                 <span class="close">&times;</span>
                 <p>Here are the comics that I appear in: </p>
-                    <div id='hidden-div' style='display:none;'>
-                    </div>
-               
+                    <div id='hidden-div' style='display:none;'></div>
+                </div>
                 
-              </div>
-
             </div>
             
             <script>
@@ -376,7 +372,15 @@
             </script>
 
 
-            <h3>Chat With Black Widow!</h3>
+            <h3>
+                <p style="text-align:left;">
+                    Chat With Black Widow! 
+                    <span style="float:right;">
+                        <input style="text-align:right" type="button" class="btn btn-secondary" name="clear" id="clear" value="Clear Chat" onclick="clearchat()">
+                    </span>
+                </p>
+            </h3>
+
 
             <div id="chatwindow">
 
@@ -390,7 +394,6 @@
                 <input type="button" class="btn btn-secondary" name="send" id="send" value=">" onclick="reply()">
                 
             </div>    
-            <input style="text-align:right" type="button" class="btn btn-secondary" name="clear" id="clear" value="Clear Chat" onclick="clearchat()">
 
         </div>
         
