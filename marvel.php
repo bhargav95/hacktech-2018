@@ -43,6 +43,14 @@
                 background-color: white;
             }
             
+            #wrappedScroll{
+                display: block;
+                overflow-y: auto;
+                height: 500px;
+                width = 950px;
+            }
+            
+            
             .query{
                 width: 950px;
                 text-align: right;
@@ -67,8 +75,8 @@
             }
             
             .query, .answer{
-                padding-left: 10px;
-                padding-right: 10px;
+                padding-left: 30px;
+                padding-right: 30px;
             }
             
             
@@ -255,6 +263,8 @@
                 chat.innerHTML += '<div class="answer"><img src="images/blackWidow.jpg" style="border-radius: 50%" alt="Black Widow" height="48" width="48"><p>'+answerfrommicrosoft+'</p></div>';
                 //chat.innerHTML += '<div class="answer"><span>'+answer+'</span></div>';
             
+                var objDiv = document.getElementById("wrappedScroll");
+                objDiv.scrollTop = objDiv.scrollHeight;
             }
             
             function GiveJoke(ans=""){
@@ -266,6 +276,14 @@
                 res+='<br><input type="button" name="another_joke" value="Another Joke" onclick=\'reply("joke")\'>';
                 
                 return res;
+            }
+            
+            function Bully(ans){
+                return "That's terrible, I'm sorry. My advice is to not confront the bully. Talk to your parents/guardians or a school supervisor.";
+            }
+            
+            function Addition(ans){
+                return "The answer is&nbsp;"+((+ans.entities[0].entity)+(+ans.entities[1].entity));
             }
             
             function AreYouFriendsWith(ans){
@@ -373,19 +391,19 @@
 
 
             <h3>
-                <p style="text-align:left;">
-                    Chat With Black Widow! 
+                <p style="text-align:left;font-family: 'Permanent Marker', cursive;">
+                    Chat with Black Widow!
                     <span style="float:right;">
                         <input style="text-align:right" type="button" class="btn btn-secondary" name="clear" id="clear" value="Clear Chat" onclick="clearchat()">
                     </span>
                 </p>
             </h3>
 
-
+            <div id="wrappedScroll">
             <div id="chatwindow">
 
             </div>
-
+            </div>
             
             
             <div class="input-group" style="padding-top:5px">
