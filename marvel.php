@@ -2,8 +2,8 @@
     
     $site="http://gateway.marvel.com/v1/public/characters/1009189/comics";
     $site2="http://gateway.marvel.com/v1/public/characters";
-    $public_key="6d9ab1cb36c79afd6168a751b4195251";
-    $private_key="7c3998174e56ace40681561b366adf297c73931c";
+    $public_key="";
+    $private_key="";
 
     $time_stamp="12";
 
